@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 
 <html>
-
 <head>
-    <title>Convertify</title>
+    <title>Convertify | Exchange Rate Calculator</title>
     <link href="styles.css" rel="stylesheet">
-    <link href="../images/icon.png" rel="icon" type="image/png">
+    <link href="../images/arrows.png" rel="icon" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <main>
-        <div id="wrapper">
-            <h1 class="user-select" id="header">Convertify</h1>
-            <p  class="user-select" id="header-text">Welcome to Convertify, your go-to web application for converting various file formats 
+    <div id="wrapper">
+        <h1 class="user-select" id="header">Convertify</h1>
+        <p  class="user-select" id="header-text">Welcome to Convertify, your go-to web application for converting various file formats 
 
-            <div id="enter-amount">
-                <h4 class="user-select" >Enter amount</h4>
-                <input placeholder="100">
+        <div id="enter-amount">
+            <h4 class="user-select" >Enter amount</h4>
+            <input placeholder="100" minlength="0">
+        </div>
+
+        <div id="conversion">
+
+            <div class="From-To">
+                <h4 class="user-select">From</h4>
+                <input>
             </div>
 
-            <div id="conversion">
+            <button id="switch"></button>
 
-                <div class="From-To">
-                    <h4 class="user-select">From</h4>
-                    <input>
-                </div>
-
-                <div>
-                </div>
-                    
-                <div class="From-To">
-                    <h4 class="user-select" >To</h4>
-                    <input>
-                </div>
-                
+            <div class="From-To">
+                <h4 class="user-select" >To</h4>
+                <input>
             </div>
-
-            <section>
-                <p>100 usd = 9883 dh</p>
-            </section>
-
-            <button>Get Exchange Rate</button>
             
         </div>
-    </main>
+
+        <section>
+            <p>100 usd = 9883 dh</p>
+        </section>
+
+        <button id="exchange">Get Exchange Rate</button>
+        
+    </div>
+    <script src="script.js"></script>
 
 </body>
-
 </html>
