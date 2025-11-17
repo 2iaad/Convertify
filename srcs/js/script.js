@@ -24,8 +24,6 @@ function getExchangeRate()
         let exchangeRate = result.conversion_rates[toCurrencyValue];
         let totalExchangeRate = (amountValue * exchangeRate).toFixed(2);
 
-        // console.log(totalExchangeRate);
-
         let HtmlFinalResult = document.querySelector("div section p");
         HtmlFinalResult.innerText = `${amountValue} ${fromCurrencyValue} = ${totalExchangeRate} ${toCurrencyValue}`;
     })
