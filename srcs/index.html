@@ -10,38 +10,41 @@
 
 <body>
     <div id="wrapper">
-        <h1 class="user-select" id="header">Convertify</h1>
+        <header class="user-select">Convertify</header>
         <p  class="user-select" id="header-text">Welcome to Convertify, your go-to web application for converting various file formats 
 
         <div id="enter-amount">
             <h4 class="user-select" >Enter amount</h4>
-            <input placeholder="100" minlength="0">
+            <input id="amount" placeholder="100">
         </div>
 
         <div id="conversion">
 
             <div class="From-To">
                 <h4 class="user-select">From</h4>
-                <input>
+                <input id="from">
+                <ul id="from-suggestions"></ul>
             </div>
 
             <button id="switch"></button>
 
             <div class="From-To">
                 <h4 class="user-select" >To</h4>
-                <input>
+                <input id="to">
             </div>
             
         </div>
 
         <section>
-            <p>100 usd = 9883 dh</p>
+            <p>     <br/>      </p>
         </section>
 
         <button id="exchange">Get Exchange Rate</button>
         
     </div>
-    <script src="script.js"></script>
+
+    <script src="js/script.js" type="module"></script>
+    <!-- <script src="js/country-list.js"></script> -->
 
 </body>
 </html>

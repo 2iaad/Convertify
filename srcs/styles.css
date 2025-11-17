@@ -22,9 +22,9 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../images/generated-image.png");
-    background-image: url("../images/generated-item2.png");
-    /* background-image: url("../images/generated-item3.png"); */
+    /* background-image: url("../images/generated-image.png"); */
+    /* background-image: url("../images/generated-item2.png"); */
+    background-image: url("../images/generated-item3.png");
     background-size: cover;
     background-position: center;
     filter: blur(15px);        /* <<< blur amount */
@@ -33,7 +33,7 @@ body::before {
 }
 
 div#wrapper {
-    gap: 25px;
+    gap: 18px;
     display: flex;
     flex-direction: column;
 
@@ -47,7 +47,7 @@ div#wrapper {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-div#wrapper>h1#header {
+div#wrapper>header {
     align-self: center;
     font-size: 45px;
     margin-top: 10px;
@@ -70,12 +70,12 @@ div#conversion img {
     width: 50px;
 }
 
-
 div#enter-amount, div#conversion > div {
     width: 100%;    /* make each inner block stretch full width */
 }
 
 input {
+    font-size: 18px;
     border: none;
     background-color: rgba(255, 255, 255, 0.328);
     width: 100%;
@@ -83,12 +83,8 @@ input {
     border-radius: 8px;
 }
 
-button#exchange {
-    border: none;
-    border-radius: 8px;
-    background-color: rgba(255, 0, 0, 0.675);
-    padding: 20px;
-    cursor: pointer;
+section > p {
+    font-size: large;
 }
 
 button#switch {
@@ -96,7 +92,7 @@ button#switch {
     margin-top: 25px;
     width: 130px;
     height: 50px;
-
+    
     border: none;
     border-radius: 50%;
     
@@ -106,8 +102,29 @@ button#switch {
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
+    
+    transition: transform 0.3s;
+}
+button#switch:hover {
+    transform: scale(1.05);
+}
+
+button#exchange {
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 0, 0, 0.675);
+    padding: 20px;
+    cursor: pointer;
+    transition: background 1s ease, transform 0.3s ease;
+}
+button#exchange:hover {
+    background-color: rgba(255, 0, 0, 0.973);
+    transform: scale(1.01);
 }
 
 .user-select {
     user-select: none;
 }
+
+/*###################################*/
+
