@@ -83,3 +83,64 @@ function switchCurrency()
     getExchangeResult();
     // [fromCurrency.value, toCurrency.value] = [toCurrency.value, fromCurrency.value]; // this also works
 }
+
+
+/**
+ * 
+ * @param {From input box} input
+ * @param {to input box} list
+ */
+
+function setupAutocomplete(input, list) {
+    // Create suggestions container
+    const container = document.createElement("div");
+    container.classList.add("autocomplete-suggestions");
+    input.parentNode.appendChild(container);
+    container.style.display = "none";
+
+    // Listen to typing
+    input.addEventListener("input", () => {
+        const value = input.value.toUpperCase().trim();
+        container.innerHTML = "";
+
+        if (!value) {
+            container.style.display = "none";
+            return;
+        }
+
+        const matches = list.filter(c => c.startsWith(value));
+
+        if (matches.length === 0) {
+            container.style.display = "none";
+            input.style.borderRadius = "8px"; // back to normal
+            return;
+        }
+
+        matches.forEach(match => {
+            const item = document.createElement("div");
+            item.classList.add("autocomplete-suggestion");
+            item.innerText = match;
+            item.addEventListener("click", () => {
+                input.value = match;
+                container.style.display = "none";
+            });
+            container.appendChild(item);
+        });
+
+        container.style.display = "block";
+        input.style.borderRadius = "8px 8px 0px 0px";
+    });
+
+    // Hide suggestions if user clicks outside
+    document.addEventListener("click", (e) => {
+        if (e.target !== input) {
+            container.style.display = "none";
+            input.style.borderRadius = "8px"; // back to normal
+
+        }
+    });
+}
+
+// Usage for your inputs
+setupAutocomplete(fromCurrency, currencySupported);
+setupAutocomplete(toCurrency, currencySupported);

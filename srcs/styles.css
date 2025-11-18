@@ -75,7 +75,9 @@ div#enter-amount, div#conversion > div {
 }
 
 input {
-    font-size: 18px;
+    outline: none;
+    box-shadow: none;
+    font-size: 16px;
     border: none;
     background-color: rgba(255, 255, 255, 0.328);
     width: 100%;
@@ -144,4 +146,32 @@ button#exchange:hover {
     color: #ff2a2a;
     font-style: italic;
     text-shadow: 1px 1px 25px black, -1px -1px 25px rgb(0, 0, 0);
+}
+
+/*################# auto-complete ##################*/
+
+.autocomplete-suggestions {
+    position: absolute;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.328),
+        rgba(255, 0, 0, 0.675)
+    );
+
+    border: none;
+    border-radius: 0px 0px 8px 8px;
+    max-height: 150px;
+    overflow: auto;
+    width: 31.3%;
+    font-size: 16px;
+}
+
+.autocomplete-suggestion {
+    padding-left: 20px;
+    padding-bottom: 8px;
+    cursor: pointer;
+}
+
+.autocomplete-suggestion:hover {
+    background-color: #ffffff26;
 }
