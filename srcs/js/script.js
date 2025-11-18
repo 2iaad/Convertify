@@ -15,24 +15,46 @@ exchangeButton.addEventListener("click", e => { e.preventDefault(); getExchangeR
 
 async function getExchangeResult()
 {
+    HtmlFinalResult.innerHTML = `<div class="spinner"></div> Loading...`; // Pop a spinning circle
+    HtmlFinalResult.classList.remove("error"); // Clear previous error styling
+    
     let from = fromCurrency.value.toUpperCase(), to = toCurrency.value.toUpperCase(); // Update inputs after each click
     let amount = enterAmount.value;
 
-    if (!currencySupported.includes(from) || !currencySupported.includes(to))
-    {
-        HtmlFinalResult.innerText = ``;
-        return alert("error");
-    }
-
+    // if (!currencySupported.includes(from) || !currencySupported.includes(to)) // this can be ignored because is checked in line 41:if()
+    // {
+    //     HtmlFinalResult.innerText = "❌ Invalid currency";
+    //     HtmlFinalResult.classList.add("error");
+    //     return ;
+    // }
+    
     const   URL = `https://v6.exchangerate-api.com/v6/${ApiKey}/latest/${from}`
     
-    const   response = await fetch(URL);    // Send the GET request
-    const   responseJSON = await response.json(); // Convert response to JSON
-
-    let exchangeRate = responseJSON.conversion_rates[to];
-    let totalExchangeRate = (amount * exchangeRate).toFixed(2);
-
-    HtmlFinalResult.innerText = `${amount} ${from} = ${totalExchangeRate} ${to}`;
+    try
+    {
+        const   response = await fetch(URL);    // Send the GET request
+        if (!response.ok) // Handle HTTP errors
+        {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const   responseJSON = await response.json(); // Convert response to JSON
+        if (!responseJSON.conversion_rates || !responseJSON.conversion_rates[to]) // Handle API-specific errors
+        {
+            throw new Error("Conversion rate not available");
+        }
+        
+        let exchangeRate = responseJSON.conversion_rates[to];
+        let totalExchangeRate = (amount * exchangeRate).toFixed(2);
+        
+        HtmlFinalResult.innerText = `${amount} ${from} = ${totalExchangeRate} ${to}`;
+    }
+    catch (error)
+    {
+        HtmlFinalResult.innerText = `❌ ${error.message}`;
+        HtmlFinalResult.classList.add("error");
+        console.error(error);
+    }
 
 /*
     without async keyword:
