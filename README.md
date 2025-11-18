@@ -47,3 +47,53 @@ Buttons and hover interactions feel responsive & polished.
 | **CSS** | Styling (glassmorphism, animations, gradients) |
 | **JavaScript** | Logic, API calls, autocomplete, DOM |
 | **ExchangeRate API** | Fetching live exchange data |
+
+---
+
+# Work Flow
+
+```
+         ┌──────────────────┐
+         │   User inputs    │
+         │ amount/currencies│
+         └─────────┬────────┘
+                   │
+                   ▼
+         ┌────────────────────┐
+         │   Validate input   │
+         └─────┬──────────────┘
+               │ valid?
+       ┌───────┴───────────┐
+       │                   │
+      NO▼                  YES▼
+┌──────────────┐    ┌──────────────────────┐
+│  Show error  │    │ Fetch exchange rate  │
+└──────────────┘    │ (async/await fetch())│
+                    └───────────┬──────────┘
+                                │
+                                ▼
+                    ┌────────────────────────┐
+                    │ Compute final result    │
+                    │ amount * conversionRate│
+                    └───────────┬────────────┘
+                                │
+                                ▼
+                    ┌────────────────────────┐
+                    │ Display output in UI   │
+                    └────────────────────────┘
+```
+# What I Learned From This Project ?
+
+-> How to communicate with APIs
+
+-> How to use async/await properly
+
+-> DOM manipulation and event listeners
+
+-> Adding UI feedback (spinners, suggestions, errors)
+
+-> Improving UX with simple touches
+
+-> Git and GitHub workflows
+
+-> Clean code organization
