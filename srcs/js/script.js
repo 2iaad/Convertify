@@ -99,6 +99,7 @@ function setupAutocomplete(input, list) {
 
     // Listen to typing
     input.addEventListener("input", () => {
+        input.style.borderRadius = "8px"; // back to normal
         const value = input.value.toUpperCase().trim();
         container.innerHTML = "";
 
