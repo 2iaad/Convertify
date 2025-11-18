@@ -6,6 +6,8 @@ const   enterAmount = document.querySelector("div#enter-amount input#amount")
 const   fromCurrency = document.getElementById("from");
 const   toCurrency = document.getElementById("to");
 
+const   HtmlFinalResult = document.querySelector("div section p");
+
 const   exchangeButton = document.querySelector("button#exchange");
 
 exchangeButton.addEventListener("click", e => { e.preventDefault(); getExchangeResult(); })
@@ -17,7 +19,10 @@ async function getExchangeResult()
     let amount = enterAmount.value;
 
     if (!currencySupported.includes(from) || !currencySupported.includes(to))
-        alert("error");
+    {
+        HtmlFinalResult.innerText = ``;
+        return alert("error");
+    }
 
     const   URL = `https://v6.exchangerate-api.com/v6/${ApiKey}/latest/${from}`
     
@@ -27,7 +32,6 @@ async function getExchangeResult()
     let exchangeRate = responseJSON.conversion_rates[to];
     let totalExchangeRate = (amount * exchangeRate).toFixed(2);
 
-    let HtmlFinalResult = document.querySelector("div section p");
     HtmlFinalResult.innerText = `${amount} ${from} = ${totalExchangeRate} ${to}`;
 
 /*
