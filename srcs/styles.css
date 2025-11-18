@@ -128,7 +128,7 @@ button#exchange:hover {
     user-select: none;
 }
 
-/*################# spinner ##################*/
+/*################# spinner & error ##################*/
 
 /* Spinner inside the paragraph while getting the exchange rate from the API */
 #result .spinner {
@@ -143,7 +143,8 @@ button#exchange:hover {
 }
 
 #result.error {
-    color: #ff2a2a;
+    color: #ff0000;
+    font-size: 17.5px;
     font-style: italic;
     text-shadow: 1px 1px 25px black, -1px -1px 25px rgb(0, 0, 0);
 }

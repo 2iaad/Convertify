@@ -27,7 +27,6 @@ async function getExchangeResult()
     //     HtmlFinalResult.classList.add("error");
     //     return ;
     // }
-    
     const   URL = `https://v6.exchangerate-api.com/v6/${ApiKey}/latest/${from}`
     
     try
@@ -39,7 +38,7 @@ async function getExchangeResult()
         }
         
         const   responseJSON = await response.json(); // Convert response to JSON
-        if (!responseJSON.conversion_rates || !responseJSON.conversion_rates[to]) // Handle API-specific errors
+        if (!responseJSON.conversion_rates || !responseJSON.conversion_rates[from] || !responseJSON.conversion_rates[to]) // Handle API-specific errors
         {
             throw new Error("Conversion rate not available");
         }
