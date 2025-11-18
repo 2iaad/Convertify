@@ -1,52 +1,59 @@
-import { currencySupported } from "./country-list.js";
+import { currencySupported } from "./country-list.js"
 
-const ApiKey = "c17b1b0769e17069a3bad2e0";
+const ApiKey = "c17b1b0769e17069a3bad2e0"
 
-let fromCurrency = document.getElementById("from");
-let toCurrency = document.getElementById("to");
+const   enterAmount = document.querySelector("div#enter-amount input#amount")
+const   fromCurrency = document.getElementById("from");
+const   toCurrency = document.getElementById("to");
 
-let exchangeButton = document.getElementById("exchange");
-exchangeButton.addEventListener("click", e => { e.preventDefault(); getExchangeRate(); });
+const   exchangeButton = document.querySelector("button#exchange");
 
-function getExchangeRate()
+exchangeButton.addEventListener("click", e => { e.preventDefault(); getExchangeResult(); })
+
+
+async function getExchangeResult()
 {
-    
-    const amount = document.getElementById("amount");
-    let amountValue = amount.value
-    
-    const fromCurrencyValue = fromCurrency.value.toUpperCase(), toCurrencyValue = toCurrency.value.toUpperCase();
-    if (!currencySupported.includes(fromCurrencyValue) || !currencySupported.includes(toCurrencyValue))
-        alert("invalide currency")
+    let from = fromCurrency.value.toUpperCase(), to = toCurrency.value.toUpperCase(); // Update inputs after each click
+    let amount = enterAmount.value;
 
-    const url = `https://v6.exchangerate-api.com/v6/${ApiKey}/latest/${fromCurrencyValue}`
+    if (!currencySupported.includes(from) || !currencySupported.includes(to))
+        alert("error");
+
+    const   URL = `https://v6.exchangerate-api.com/v6/${ApiKey}/latest/${from}`
+    
+    const   response = await fetch(URL);    // Send the GET request
+    const   responseJSON = await response.json(); // Convert response to JSON
+
+    let exchangeRate = responseJSON.conversion_rates[to];
+    let totalExchangeRate = (amount * exchangeRate).toFixed(2);
+
+    let HtmlFinalResult = document.querySelector("div section p");
+    HtmlFinalResult.innerText = `${amount} ${from} = ${totalExchangeRate} ${to}`;
+
+/*
+    without async keyword:
+
+    const url = `https://v6.exchangerate-api.com/v6/${ApiKey}/latest/${from}`
     // fetch(url).then(response => console.log(response.json()));
     fetch(url).then(response => response.json()).then(result => {
-        let exchangeRate = result.conversion_rates[toCurrencyValue];
-        let totalExchangeRate = (amountValue * exchangeRate).toFixed(2);
+        let exchangeRate = result.conversion_rates[to];
+        let totalExchangeRate = (amount * exchangeRate).toFixed(2);
 
         let HtmlFinalResult = document.querySelector("div section p");
-        HtmlFinalResult.innerText = `${amountValue} ${fromCurrencyValue} = ${totalExchangeRate} ${toCurrencyValue}`;
+        HtmlFinalResult.innerText = `${amount} ${from} = ${totalExchangeRate} ${to}`;
     })
+*/
 }
-
-/**
- ***********************************************************************
- ***********************************************************************
- */
 
 let switchButton = document.getElementById("switch")
 switchButton.addEventListener("click", e => { e.preventDefault(); switchCurrency(); });
 
-function switchCurrency() {
+function switchCurrency()
+{
     const tmp = fromCurrency.value;
     fromCurrency.value = toCurrency.value;
     toCurrency.value = tmp;
 
-    getExchangeRate();
+    getExchangeResult();
     // [fromCurrency.value, toCurrency.value] = [toCurrency.value, fromCurrency.value]; // this also works
 }
-
-/**
- ***********************************************************************
- ***********************************************************************
- */
